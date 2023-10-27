@@ -36,7 +36,7 @@ const ClientProfile = () => {
           <Grid container spacing={5}>
             <Grid container item xs={12} sm={6} md={6} lg={6}>
               <UserCard
-              avatar={userContext?.user?.avatar}
+                avatar={userContext?.user?.avatar}
                 fullName={userContext?.user?.fullName}
                 LinkedIn={userContext?.user?.client?.socialMedia?.[0].url}
                 Twitter={userContext?.user?.client?.socialMedia?.[0].url}
