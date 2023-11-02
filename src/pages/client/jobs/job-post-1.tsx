@@ -179,6 +179,18 @@ const Job_Post_1 = () => {
           close: true
         })
       );
+    } else if (jobVisibility === '') {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'Please select budget range',
+          variant: 'alert',
+          alert: {
+            color: 'error'
+          },
+          close: true
+        })
+      );
     } else if (duration === '') {
       dispatch(
         openSnackbar({
@@ -284,7 +296,7 @@ const Job_Post_1 = () => {
   const handlePublishClick = () => {
     try {
       dispatch(createJob(job));
-      navigate('/client/job-post-invitation');
+      setTimeout(() => navigate('/client/job-post-invitation'), 2000);
     } catch (error) {
       console.log(error);
     }
@@ -340,7 +352,7 @@ const Job_Post_1 = () => {
                           defaultValue="onDemandConsultancy"
                           name="radio-buttons-group"
                           row
-                          onChange={(event: any) => handleTypeOfEngagementChange(event.target.value)}
+                          onChange={handleTypeOfEngagementChange}
                         >
                           <Grid container spacing={20}>
                             <Grid item xs={3} lg={3}>

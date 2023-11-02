@@ -235,7 +235,7 @@ const Chat = () => {
         <Grid item xs={3}></Grid>
         <Grid item xs={1}>
           <Stack direction="row" spacing={5}>
-            <Avatar alt="avatar" src={user.avatar} sx={{ minHeight: '3vw', minWidth: '3vw', marginRight: '2vh' }} />
+            <Avatar alt="avatar" src={user?.avatar} sx={{ minHeight: '3vw', minWidth: '3vw', marginRight: '2vh' }} />
             <Typography variant="h5" sx={{ display: 'inline-flex', whiteSpace: 'nowrap', alignItems: 'center' }}>
               {user.name}
             </Typography>

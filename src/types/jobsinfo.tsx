@@ -67,6 +67,7 @@ export type JobOverview = {
 
 export type MyHires = {
   expertName: string;
+  avatar: string;
   contractType: string;
   location: string;
   rate: string;

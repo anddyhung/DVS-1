@@ -38,22 +38,23 @@ const Meetings = (props: any) => {
   let tomorrowDate = currentDate.getDate() + 1;
   const handleStartMeetingClick = () => {};
   const toggleDrawer = (open: boolean) => (event: any) => {
-    if(meetingData?.fullName){
-
+    if (meetingData?.fullName) {
       if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
         return;
       }
       setOpen(open);
-    }else{
-      dispatch(openSnackbar({
-        open:true,
-        message:'Please select person.',
-        variant:'alert',
-        alert:{
-          color:'warning'
-        },
-        close:true
-      }))
+    } else {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'Please select person.',
+          variant: 'alert',
+          alert: {
+            color: 'warning'
+          },
+          close: true
+        })
+      );
     }
   };
   const handleMoreClick = () => {};
@@ -120,7 +121,7 @@ const Meetings = (props: any) => {
             <Grid item xs={3}></Grid>
             <Grid item xs={1}>
               <Stack direction="row" spacing={5}>
-                <Avatar alt="avatar" src={userContext?.user?.avatar} sx={{ minHeight: '3vw', minWidth: '3vw', marginRight: '2vh' }} />
+                <Avatar alt="avatar" src={meetingData?.avatar} sx={{ minHeight: '3vw', minWidth: '3vw', marginRight: '2vh' }} />
                 <Typography variant="h5" sx={{ display: 'inline-flex', whiteSpace: 'nowrap', alignItems: 'center' }}>
                   {meetingData?.fullName}
                 </Typography>

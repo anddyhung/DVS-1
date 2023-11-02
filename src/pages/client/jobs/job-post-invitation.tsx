@@ -4,15 +4,12 @@ import RecommendedExpert from 'components/cards/recommended-experts';
 import { useEffect } from 'react';
 import { useSelector, dispatch } from 'store';
 import { getRecommendedExperts } from 'store/reducers/experts';
-import { getActiveJobs } from 'store/reducers/jobs';
 
 const JobPostInvitation = () => {
+  const job = useSelector((state) => state.jobs.allJobs);
   useEffect(() => {
-    dispatch(getActiveJobs());
     dispatch(getRecommendedExperts(job[job.length - 1]?._id));
   }, []);
-  const job = useSelector((state) => state.jobs.allJobs);
-
   const recommededExperts = useSelector((state) => state.experts.recommendedExperts);
 
   return (

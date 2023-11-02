@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Expert, HriedExpertDetail } from 'types/expert';
+import { Expert, HiredExpertDetail, HriedExpertDetail } from 'types/expert';
 import axiosServices from 'utils/axios';
 import { RootState } from 'store';
 import { openSnackbar } from './snackbar';
@@ -8,6 +8,7 @@ import { Milestone } from 'types/jobsinfo';
 export const createExpert = (data: ExpertsProfile) => async (dispatch: any) => {
   try {
     const response = await axiosServices.post('/api/v1/user/expert', data);
+    console.log(data);
     if (response.status === 200) {
       dispatch(addExpert(response.data));
     } else {
@@ -170,11 +171,11 @@ export const getHiredExperts = () => async (dispatch: any) => {
   }
 };
 
-export const getExpert = (expertId: string) => async (dispatch: any) => {
+export const getExpert = (expertEmail: string) => async (dispatch: any) => {
   try {
-    const response = await axiosServices.get(`api/expert/${expertId}`);
+    const response = await axiosServices.post(`api/v1/user/detail`, { email: expertEmail[0] });
     if (response.status === 200) {
-      return response.data;
+      dispatch(getExpertDetail(response.data[0].userDetail));
     } else {
       dispatch(
         openSnackbar({
@@ -206,6 +207,7 @@ export const getExpert = (expertId: string) => async (dispatch: any) => {
 export const updateExpert = (expert: ExpertsProfile) => async (dispatch: any) => {
   try {
     const response = await axiosServices.post(`/api/v1/user/expert`, expert);
+    console.log(expert);
     if (response.status === 200) {
       dispatch(
         openSnackbar({
@@ -287,7 +289,7 @@ export const hireExpert =
         additionalInfo: additionalInfo,
         milestones: milestones
       });
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         addHiredExperts(response.data[0]);
         dispatch(
           openSnackbar({
@@ -356,6 +358,7 @@ interface ExpertState {
   recommendedExperts: Expert[];
   yearsOfExperience: string[];
   currentUser: Expert[];
+  hiredExpertDetail: HiredExpertDetail | null;
 }
 
 const initialState: ExpertState = {
@@ -363,7 +366,8 @@ const initialState: ExpertState = {
   hiredExperts: [],
   recommendedExperts: [],
   yearsOfExperience: [],
-  currentUser: []
+  currentUser: [],
+  hiredExpertDetail: null
 };
 
 export const expertSlice = createSlice({
@@ -391,10 +395,21 @@ export const expertSlice = createSlice({
     },
     addHiredExperts: (state, action: PayloadAction<Expert[] | any>) => {
       state.hiredExperts.push(action.payload);
+    },
+    getExpertDetail: (state, action: PayloadAction<HiredExpertDetail[] | any>) => {
+      state.hiredExpertDetail = action.payload;
     }
   }
 });
-export const { setExperts, setRecommededExperts, setHiredExperts, setYearsOfExperience, addExpert, setCurrentUser, addHiredExperts } =
-  expertSlice.actions;
+export const {
+  setExperts,
+  setRecommededExperts,
+  setHiredExperts,
+  setYearsOfExperience,
+  addExpert,
+  setCurrentUser,
+  addHiredExperts,
+  getExpertDetail
+} = expertSlice.actions;
 export const selectedJobs = (state: RootState) => state.jobs;
 export default expertSlice.reducer;

@@ -12,13 +12,13 @@ import { setExpertSetting } from 'store/reducers/settings';
 // ==============================|| SAMPLE PAGE ||============================== //
 const UserSettings = () => {
   const theme = useTheme();
-  const userSetting = useSelector((state)=>state.settings.expertSettings);
-  const [fractionalService, setFractionalService] = useState<boolean>(userSetting?.services?.[0]||false);
-  const [consulting, setConsulting] = useState<boolean>(userSetting?.services?.[1]||false);
-  const [mentorship, setMentorship] = useState<boolean>(userSetting?.services?.[2]||false);
-  const [project, setProject] = useState<boolean>(userSetting?.services?.[3]||false);
-  const [coaching, setCoaching] = useState<boolean>(userSetting?.services?.[4]||false);
-  const [hourlyRate, setHourlyRate] = useState<number>(userSetting?.hourlyRate||0);
+  const userSetting = useSelector((state) => state.settings.expertSettings);
+  const [fractionalService, setFractionalService] = useState<boolean>(userSetting?.services?.[0] || false);
+  const [consulting, setConsulting] = useState<boolean>(userSetting?.services?.[1] || false);
+  const [mentorship, setMentorship] = useState<boolean>(userSetting?.services?.[2] || false);
+  const [project, setProject] = useState<boolean>(userSetting?.services?.[3] || false);
+  const [coaching, setCoaching] = useState<boolean>(userSetting?.services?.[4] || false);
+  const [hourlyRate, setHourlyRate] = useState<number>(userSetting?.hourlyRate || 0);
 
   const handleSaveClick = () => {
     dispatch(setExpertSetting([fractionalService, consulting, mentorship, project, coaching], hourlyRate));

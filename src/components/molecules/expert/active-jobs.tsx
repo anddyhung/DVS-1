@@ -10,7 +10,6 @@ import { useRef, useState } from 'react';
 import IconButton from 'components/@extended/IconButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-
 export const ActiveJobs = (props: any) => {
   const anchorRef = useRef<any>(null);
 

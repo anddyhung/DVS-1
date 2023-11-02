@@ -81,11 +81,19 @@ export const clientProfileSlice = createSlice({
 export const createClientProfile = (client: ClientsProfile) => async (dispatch: any) => {
   try {
     const response = await axiosServices.post('/api/v1/user/client', {
-      phoneNumber: client.phoneNumber,
       birthday: client.birthday,
+      avatar: client.avatar,
       country: client.country,
       languages: client.languages,
-      socialMedia: client.socialMedia
+      socialMedia: client.socialMedia,
+      state: client.state,
+      city: client.city,
+      address1: client.address1,
+      address2: client.address2,
+      designation: client.designation,
+      department: client.department,
+      gender: client.gender,
+      nationality: client.nationality
     });
     if (response.status === 200) {
       setProfile(response.data[0].result);

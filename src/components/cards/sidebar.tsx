@@ -41,7 +41,7 @@ const Sidebar = (props: any) => {
   } else if (props.role === 'customer') {
     data = [
       { id: 1, text: 'My Profile', url: '/client/profile' },
-      { id: 2, text: 'Startup Details', url: '/client/startup-details' },
+      { id: 2, text: 'Organization Details', url: '/client/startup-details' },
       { id: 3, text: 'Account Settings', url: '/client/accountsettings' },
       { id: 4, text: 'Payment Settings', url: '/client/paymentsettings' },
       { id: 5, text: 'Notification Settings', url: '/client/notificationsettings' },

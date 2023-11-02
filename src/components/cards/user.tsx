@@ -8,7 +8,7 @@ const UserCard = (props: any) => {
       <CardContent>
         <Grid container spacing={1}>
           <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Box sx={{ width: '30%', aspectRatio: '1' }}>
+            <Box sx={{ width: '30%' }}>
               <Avatar alt="avatar" src={props.path} sx={{ width: '100%', height: '100%', minHeight: '6vw', minWidth: '6vw' }} />
             </Box>
           </Grid>

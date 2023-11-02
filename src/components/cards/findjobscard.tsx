@@ -35,7 +35,7 @@ const FindJobsCard = (props: any) => {
   const theme = useTheme();
   const { onCardClick } = props;
   const handleClick = (_id: any) => {
-    dispatch(onCardClick(true, props.job._id));
+    dispatch(onCardClick(true, props?.job?._id));
   };
   return (
     <Card style={{ backgroundColor: theme.palette.primary.lighter }}>
@@ -99,7 +99,7 @@ const FindJobsCard = (props: any) => {
                 <Stack spacing={1}>
                   <Typography variant="h4">Budget Range</Typography>
                   <Typography variant="body1">
-                    {props.job?.budgetRange[0]}-{props.job?.budgetRange[1]} /hour
+                    {props.job?.budgetRange[0]}-{props?.job?.budgetRange[1]} /hour
                   </Typography>
                 </Stack>
               </Grid>

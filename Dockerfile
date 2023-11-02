@@ -5,14 +5,13 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json ./
 COPY yarn.lock ./
-RUN yarn install 
+RUN yarn install --production
 COPY . ./
 RUN yarn build
 
 # Stage 2
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /app/build /usr/share/nginx/html 
-EXPOSE 80
+RUN rm -rf./*
+COPY --from=builder /frontend/build .
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

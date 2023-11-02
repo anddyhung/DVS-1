@@ -55,7 +55,7 @@ const PagesClientExpertsHome = () => {
                     Upcoming Meetings
                   </Typography>
                 </Grid>
-                {upcomingMeetingList.map((item: any) => (
+                {upcomingMeetingList?.map((item: any) => (
                   <Grid item xs={4}>
                     <MeetingCard
                       _id={item._id}

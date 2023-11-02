@@ -36,7 +36,7 @@ const TimeTrackerCard = (props: any) => {
           <Grid container xs={12}>
             <Grid item xs={3}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar  />
+                <DateCalendar />
               </LocalizationProvider>
               <Divider />
             </Grid>

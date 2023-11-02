@@ -24,7 +24,7 @@ const AuthCodeVerification = () => {
   const [otp, setOtp] = useState('');
   const handleContinueClick = () => {
     try {
-      if (otp.length == 4) {
+      if (otp.length === 4) {
         sendOtpCode(location.state.email, otp);
       } else {
         dispatch(

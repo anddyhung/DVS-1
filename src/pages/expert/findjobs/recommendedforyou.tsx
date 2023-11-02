@@ -5,7 +5,7 @@ import FindJobsCard from 'components/cards/findjobscard';
 import { useSelector } from 'store';
 // ==============================|| SAMPLE PAGE ||============================== //
 const RecommendedForYou = () => {
-  const recommendedJobs = useSelector((state) => state.jobs.expertSearchResults);
+  const recommendedJobs = useSelector((state) => state.jobs.expertRecommendedJobs);
   return (
     <Grid item lg={9} xl={10}>
       <Grid item xs={12} lg={12}>

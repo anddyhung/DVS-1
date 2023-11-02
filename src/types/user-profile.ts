@@ -1,3 +1,5 @@
+import { SocialMedia } from './expert';
+
 export type UserProfile = {
   id?: string;
   avatar?: string;
@@ -62,15 +64,19 @@ export type Organization = {
   country: string | undefined;
   state: string | undefined;
   city: string | undefined;
+  address1: string;
+  address2: string;
+  phone: string;
+  email: string;
+  companyType: string;
   industry: string | undefined;
   teamSize: string | undefined;
   fundingStage: string | undefined;
   logo: string | undefined;
-  website: string | undefined;
-  socialLink: string | undefined;
+  socialMedia: SocialMedia[];
 };
 
 export type ExpertSetting = {
-  services:boolean[]|undefined;
-  hourlyRate:number;
-}
+  services: boolean[] | undefined;
+  hourlyRate: number;
+};

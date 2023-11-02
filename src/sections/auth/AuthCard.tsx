@@ -10,7 +10,6 @@ import MainCard, { MainCardProps } from 'components/MainCard';
 const AuthCard = ({ children, ...other }: MainCardProps) => (
   <MainCard
     sx={{
-      
       minHeight: { xs: '100vh' },
       '& > *': {
         flexGrow: 1,

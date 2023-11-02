@@ -22,7 +22,7 @@ const UserAvatar = ({ user }: UserAvatarProps) => (
     }}
     sx={{ '& .MuiBox-root': { width: 6, height: 6 }, padding: 0, minWidth: 12, '& svg': { background: '#fff', borderRadius: '50%' } }}
   >
-    <Avatar alt={user.name} src={user.avatar && `/assets/images/users/${user.avatar}`} />
+    <Avatar alt={user.name} src={user.avatar} />
   </Badge>
 );
 

@@ -97,44 +97,47 @@ export const setOrganizationSettings = (organization: Organization) => async (di
   }
 };
 
-export const setExpertSetting = (service:boolean[], hourlyRate:number)=>async(dispatch:any)=>{
-  try{
-    const response = await axiosServices.put('/api/v1/user/expert', {service:service, hourlyRate:hourlyRate});
-    if(response.status === 200){
+export const setExpertSetting = (service: boolean[], hourlyRate: number) => async (dispatch: any) => {
+  try {
+    const response = await axiosServices.put('/api/v1/user/expert', { service: service, hourlyRate: hourlyRate });
+    if (response.status === 200) {
       setExpertSettings(response.data[0].result);
-      dispatch(openSnackbar({
-        open:true,
-        message:"Update expert settings successfully.",
-        variant:'alert',
-        alert:{
-          color:'success'
-        },
-        close:true
-      }))
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'Update expert settings successfully.',
+          variant: 'alert',
+          alert: {
+            color: 'success'
+          },
+          close: true
+        })
+      );
     }
-  }catch(error:any){
-    dispatch(openSnackbar({
-      open:true,
-      message:error[0].message,
-      variant:'alert',
-      alert:{
-        color:'error'
-      },
-      close:true
-    }))
+  } catch (error: any) {
+    dispatch(
+      openSnackbar({
+        open: true,
+        message: error[0].message,
+        variant: 'alert',
+        alert: {
+          color: 'error'
+        },
+        close: true
+      })
+    );
   }
-}
-;
+};
 interface SettingState {
   accountSetting: Account | null;
   organizationSetting: Organization | null;
-  expertSettings: ExpertSetting|null;
+  expertSettings: ExpertSetting | null;
 }
 
 const initialState: SettingState = {
   accountSetting: null,
   organizationSetting: null,
-  expertSettings:null,
+  expertSettings: null
 };
 
 export const settingSlice = createSlice({
@@ -147,7 +150,7 @@ export const settingSlice = createSlice({
     setOrganizationInfo: (state, action: PayloadAction<Organization | null>) => {
       state.organizationSetting = action.payload;
     },
-    setExpertSettings:(state, action:PayloadAction<string[]>|any)=>{
+    setExpertSettings: (state, action: PayloadAction<string[]> | any) => {
       state.expertSettings = action.payload;
     }
   }

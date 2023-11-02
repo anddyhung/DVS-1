@@ -3,6 +3,7 @@ export type EducationProps = {
   degree: string;
   subject: string;
   location: string;
+  from: Date;
   to: Date;
   description?: string;
 };

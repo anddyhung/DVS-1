@@ -589,7 +589,7 @@ const Job_MyJob = () => {
                           <ProposalsTableHead />
                           <TableBody>
                             {jobInDetail?.invites?.map((item: any) => (
-                              <Proposals Breadcrumb={label} proposalItem={item} />
+                              <Proposals Breadcrumb={label} proposalItem={item} handleClick={toggleDrawer} />
                             ))}
                           </TableBody>
                         </Table>

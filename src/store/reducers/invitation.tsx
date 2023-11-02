@@ -25,10 +25,56 @@ export const sendInvitation = (jobId: string, invitationType: string, message: s
       );
     }
   } catch (error: any) {
+    if (error[0]?.code === 409) {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'You have already sent invitation.',
+          variant: 'alert',
+          alert: {
+            color: 'warning'
+          },
+          close: true
+        })
+      );
+    } else {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'Sending Invitaion Failed, Please try again',
+          variant: 'alert',
+          alert: {
+            color: 'error'
+          },
+          close: true
+        })
+      );
+    }
+  }
+};
+export const getInvitation = () => async (dispatch: any) => {
+  try {
+    const response = await axiosServices.get('/api/v1/expert/invitation');
+    if (response.status === 200) {
+      setInvitation(response.data[0].invitation);
+    } else {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: 'There is no Invitaion.',
+          variant: 'alert',
+          alert: {
+            color: 'error'
+          },
+          close: true
+        })
+      );
+    }
+  } catch (error: any) {
     dispatch(
       openSnackbar({
         open: true,
-        message: 'Sending Invitaion Failed, Please try again',
+        message: error[0].message,
         variant: 'alert',
         alert: {
           color: 'error'
@@ -38,53 +84,23 @@ export const sendInvitation = (jobId: string, invitationType: string, message: s
     );
   }
 };
-export const getInvitation = ()=>async(dispatch:any)=> {
-  try{
-    const response = await axiosServices.get('/api/v1/expert/invitation');
-    if(response.status === 200){
-      setInvitation(response.data[0].invitation);
-    }else{
-      dispatch(openSnackbar({
-        open:true,
-        message:'There is no Invitaion.',
-        variant:'alert',
-        alert:{
-          color:'error'
-        },
-        close:true
-      }))
-    }
-  }catch(error:any){
-    dispatch(openSnackbar({
-      open:true,
-      message:error[0].message,
-      variant:'alert',
-      alert:{
-        color:'error'
-      },
-      close:true
-    }))
-  }
-}
 
 interface InvitationState {
-  invitations:Invitation[]
+  invitations: Invitation[];
 }
-const initialState:InvitationState={
-  invitations:[]
-}
-export const invitationsSlice = createSlice (
-{  name: 'invitation',
+const initialState: InvitationState = {
+  invitations: []
+};
+export const invitationsSlice = createSlice({
+  name: 'invitation',
   initialState,
-  reducers:{
-    setInvitation : (state, action:PayloadAction<Invitation[]|any>)=>{
+  reducers: {
+    setInvitation: (state, action: PayloadAction<Invitation[] | any>) => {
       state.invitations = action.payload;
     }
   }
 });
-export const {
-  setInvitation
-} = invitationsSlice.actions
-export const gettedInvitations = (state:RootState)=>state.invitation
+export const { setInvitation } = invitationsSlice.actions;
+export const gettedInvitations = (state: RootState) => state.invitation;
 
-export default  invitationsSlice.reducer;
+export default invitationsSlice.reducer;

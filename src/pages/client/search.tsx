@@ -21,6 +21,7 @@ import ISO6391 from 'iso-639-1';
 import { loadAreasOfExpertise, loadBudgetRange } from 'store/reducers/jobs';
 import { findExperts, loadYearsOfExperience } from 'store/reducers/experts';
 import { useLocation } from 'react-router-dom';
+import { getActiveJobs } from 'store/reducers/jobs';
 
 const Search = () => {
   const location = useLocation();
@@ -28,12 +29,16 @@ const Search = () => {
     dispatch(loadBudgetRange());
     dispatch(loadAreasOfExpertise());
     dispatch(loadYearsOfExperience());
+    dispatch(getActiveJobs());
   }, [dispatch]);
 
   let experts = location?.state?.searchResult;
   const [keyword, setKeyword] = useState(location?.state?.keyword);
   const budgetOptions = useSelector((state) => state.jobs.budgetRange);
   const skillsOptions = useSelector((state) => state.jobs.areasOfExpertise);
+  let jobId = useSelector((state) =>
+    state.jobs.activeJobs?.[state.jobs.activeJobs.length - 1]._id ? state.jobs.activeJobs?.[state.jobs.activeJobs.length - 1]._id : ''
+  );
   const yearsOfExperienceOptions = useSelector((state) => state.experts.yearsOfExperience);
   const theme = useTheme();
 
@@ -58,7 +63,7 @@ const Search = () => {
   };
   const languages = ISO6391.getAllNames();
   const onLanguagesDelete = (item: string) => () => {
-    setLanguages((language) => language.filter((v) => v != item));
+    setLanguages((language) => language.filter((v) => v !== item));
   };
   return (
     <Grid container spacing={5}>
@@ -178,7 +183,7 @@ const Search = () => {
             <Grid container spacing={3}>
               {experts?.map((item: any) => (
                 <Grid item xs={12}>
-                  <RecommendedExpert expert={item} />
+                  <RecommendedExpert expert={item} jobId={jobId} />
                 </Grid>
               ))}
             </Grid>

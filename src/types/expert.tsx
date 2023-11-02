@@ -20,7 +20,7 @@ export type Expert = {
   projectPreference: number;
   skills: string[];
   socialMedia: SocialMedia[];
-  tools: string;
+  tools: string[];
   weeklyCommitment: number;
   zipCode: string;
   summary: string;
@@ -63,7 +63,7 @@ export type MyJobs = {
   to: string;
 };
 export type Feedback = {
-  reviewer: string;
+  name: string;
   review: string;
   rate: number;
 };
@@ -90,6 +90,7 @@ export type Company = {
 
 export type HriedExpertDetail = {
   expertName: string;
+  avatar: string;
   expertEmail: string;
   titleName: string;
   rate: string;
@@ -97,4 +98,31 @@ export type HriedExpertDetail = {
   noOfMeeting: string;
   nextMeeting: string;
   location: string;
+};
+
+export type HiredExpertDetail = {
+  email: string;
+  fullName: string;
+  avatar: string;
+  status: string;
+  emailVerifyStatus: string;
+  expertInfo: Expert;
+  meetingData: MeetingData[];
+  feedback: Feedback[];
+};
+
+export type MeetingData = {
+  _id: string;
+  type: string;
+  from: string;
+  to: string;
+  title: string;
+  description: string;
+  start: Date;
+  end: Date;
+  status: string;
+  diff: number;
+  amountPaid: number;
+  fromName: string;
+  toName: string;
 };

@@ -8,7 +8,6 @@ import { CustomShadowProps } from 'types/theme';
 // ==============================|| DEFAULT THEME - CUSTOM SHADOWS  ||============================== //
 
 const CustomShadows = (theme: Theme): CustomShadowProps => ({
- 
   button: theme.palette.mode === ThemeMode.DARK ? `0 2px 0 rgb(0 0 0 / 5%)` : `0 2px #0000000b`,
   text: `0 -1px 0 rgb(0 0 0 / 12%)`,
   z1:

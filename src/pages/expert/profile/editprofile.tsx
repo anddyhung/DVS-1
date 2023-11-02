@@ -35,12 +35,10 @@ import { dispatch } from 'store';
 import { fetchCurrentUser } from 'store/reducers/current-user';
 import { loadToolsOfExpertise, loadAreasOfExpertise, loadIndustries } from 'store/reducers/jobs';
 import { updateExpert } from 'store/reducers/experts';
-import { useNavigate } from 'react-router-dom';
 import { SocialMediaProps } from 'types/experts-profile';
 import JWTContext from 'contexts/JWTContext';
 // ==============================|| SAMPLE PAGE ||============================== //
 const EditExpertProfile = () => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const userContext = useContext(JWTContext);
   useEffect(() => {
@@ -291,8 +289,6 @@ const EditExpertProfile = () => {
     }));
     if (newEducation) {
       setEducation(newEducation);
-      console.log(newEducation);
-      console.log(education);
     }
     if (experience?.length !== 0 && education?.length !== 0) {
       dispatch(
@@ -322,7 +318,6 @@ const EditExpertProfile = () => {
           totalEarning: 0
         })
       );
-      navigate('/expert/profile');
     }
   };
 

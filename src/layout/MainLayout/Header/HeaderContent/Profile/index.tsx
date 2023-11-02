@@ -3,23 +3,21 @@ import { useNavigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, ButtonBase, CardContent, ClickAwayListener, Grid, Paper, Popper, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, ButtonBase, CardContent, ClickAwayListener, Grid, Paper, Popper, Stack, Typography } from '@mui/material';
 
 // project import
 import ProfileTab from './ProfileTab';
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
-import IconButton from 'components/@extended/IconButton';
 import useAuth from 'hooks/useAuth';
+import { useContext } from 'react';
 
-// assets
-import avatar1 from 'assets/images/users/avatar-1.png';
-import { LogoutOutlined } from '@ant-design/icons';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // types
 import { ThemeMode } from 'types/config';
+import JWTContext from 'contexts/JWTContext';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -44,7 +42,7 @@ function TabPanel(props: TabPanelProps) {
 const Profile = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-
+  const userContext = useContext(JWTContext);
   const { logout, user } = useAuth();
   const handleLogout = async () => {
     try {
@@ -94,7 +92,7 @@ const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" alignItems="center" sx={{ p: 0.5 }} justifyContent={'center'}>
-          <Avatar alt="profile user" src={avatar1} size="md" />
+          <Avatar alt="profile user" src={userContext?.user?.avatar} size="md" />
           <KeyboardArrowDownIcon />
         </Stack>
       </ButtonBase>
@@ -135,18 +133,11 @@ const Profile = () => {
                     <Grid container justifyContent="space-between" alignItems="center">
                       <Grid item>
                         <Stack direction="row" spacing={1.25} alignItems="center">
-                          <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                          <Avatar alt="profile user" src={userContext?.user?.avatar} sx={{ width: 32, height: 32 }} />
                           <Stack>
                             <Typography variant="h6">{user?.fullName}</Typography>
                           </Stack>
                         </Stack>
-                      </Grid>
-                      <Grid item>
-                        <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={handleLogout}>
-                            <LogoutOutlined />
-                          </IconButton>
-                        </Tooltip>
                       </Grid>
                     </Grid>
                   </CardContent>

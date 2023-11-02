@@ -1,3 +1,5 @@
+import { SocialMedia } from './expert';
+
 export type SocialMediaProps = {
   type: string;
   url: string | undefined;
@@ -10,6 +12,11 @@ export type LanguagesProps = {
 
 export type OrganizationProps = {
   organizationName: string;
+  companyType: string;
+  address1: string;
+  address2: string;
+  email: string;
+  phone: string;
   dayOfRegistration: Date;
   description: string;
   revenue: string;
@@ -21,14 +28,21 @@ export type OrganizationProps = {
   specialities: string[];
   fundingStage: string;
   logo: string;
-  website: string;
-  socialLink: string;
+  socialMedia: SocialMedia[];
 };
 
 export interface ClientsProfile {
   email: string | undefined;
-  phoneNumber: string;
+  gender: string | undefined;
+  designation: string | undefined;
+  department: string | undefined;
+  nationality: string | undefined;
+  avatar: string;
   country: string;
+  state: string;
+  city: string;
+  address1: string;
+  address2: string;
   birthday: null | Date | undefined;
   languages: null | LanguagesProps[];
   profileCompleteness: number | undefined;

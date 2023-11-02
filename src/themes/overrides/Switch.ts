@@ -79,7 +79,6 @@ export default function Switch(theme: Theme) {
               opacity: 0.3
             }
           }
-       
         },
         root: {
           color: theme.palette.text.primary,

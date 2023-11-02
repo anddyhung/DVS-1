@@ -178,7 +178,7 @@ const ClientHome = () => {
                 </Button>
               </Stack>
             </Grid>
-            {recentHires.map((item: any) => (
+            {recentHires?.map((item: any) => (
               <Grid item xs={4}>
                 <RecentHireCard
                   path={item.path}

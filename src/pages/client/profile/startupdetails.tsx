@@ -8,9 +8,11 @@ import Sidebar from 'components/cards/sidebar';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import JWTContext from 'contexts/JWTContext';
+
 // ==============================|| SAMPLE PAGE ||============================== //
 const ExpertProfile = () => {
   const userContext = useContext(JWTContext);
+  const webSite = userContext?.user?.client.organization?.socialMedia.find((website) => website.type === 'Company Website');
   return (
     <Grid container spacing={4}>
       <Grid item lg={3} xl={2}>
@@ -48,7 +50,7 @@ const ExpertProfile = () => {
               <Typography variant="h4">Headquarters</Typography>
               <Typography variant="h6">
                 {userContext?.user?.client?.organization?.country} {userContext?.user?.client?.organization?.state}{' '}
-                {userContext?.user?.client?.organization?.city}
+                {userContext?.user?.client?.organization?.city} {userContext?.user?.client.address1}
               </Typography>
             </Grid>
             <Grid item xs={12} lg={4}>
@@ -67,10 +69,14 @@ const ExpertProfile = () => {
               <Typography variant="h4">Funding Stage</Typography>
               <Typography variant="h6">{userContext?.user?.client?.organization?.fundingStage}</Typography>
             </Grid>
-            <Grid item xs={12} lg={4}>
-              <Typography variant="h4">Website</Typography>
-              <Typography variant="h6">{userContext?.user?.client?.organization?.website}</Typography>
-            </Grid>
+            {webSite && (
+              <Grid item xs={12} lg={4}>
+                <Typography variant="h4">Website</Typography>
+                <Typography component={Link} to={webSite.url} variant="h6" sx={{ textDecoration: 'none' }}>
+                  {webSite.url}
+                </Typography>
+              </Grid>
+            )}
             <Grid item xs={12} lg={4}>
               <Typography variant="h4">Social Media</Typography>
               <Stack direction={'row'} gap={2}>

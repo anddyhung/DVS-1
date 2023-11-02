@@ -11,10 +11,10 @@ const ArchivedPropoals = () => {
       <Grid item xs={12} lg={12}>
         <MainCard>
           <Typography variant="h2" marginBottom={'1.2rem'} marginTop={'1.5rem'}>
-            Archived Proposals({archievedProposals.length})
+            Archived Proposals({archievedProposals?.length})
           </Typography>
           <Stack spacing={2} sx={{ minHegith: '70vh' }}>
-            {archievedProposals.length !== undefined ? (
+            {archievedProposals?.length !== undefined ? (
               archievedProposals?.map((item: any) => <FindJobsCard job={item} />)
             ) : (
               <Typography>No Search Result</Typography>

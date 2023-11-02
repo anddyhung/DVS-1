@@ -1,21 +1,25 @@
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import useTheme from '@mui/system/useTheme';
-import { Avatar, Box, FormLabel, Stack, TextField } from '@mui/material';
+import { Box, CardMedia, FormLabel, Stack, TextField } from '@mui/material';
 import { CameraOutlined } from '@ant-design/icons';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { ThemeMode } from 'types/config'
+import { ThemeMode } from 'types/config';
 
 export default function CompanylogoCard(props: any) {
   const theme = useTheme();
   const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
-  const [avatar, setAvatar] = useState<string | undefined>(props.logo);
+  const [avatar, setAvatar] = useState<string | any>(props.logo);
   const { getFileName } = props;
 
   useEffect(() => {
     if (selectedImage) {
-      setAvatar(URL.createObjectURL(selectedImage));
-      getFileName(URL.createObjectURL(selectedImage));
+      let reader = new FileReader();
+      reader.readAsDataURL(selectedImage);
+      reader.onload = function () {
+        setAvatar(reader.result);
+        getFileName(reader.result);
+      };
     }
   }, [selectedImage]);
   return (
@@ -35,13 +39,13 @@ export default function CompanylogoCard(props: any) {
           htmlFor="change-avtar"
           sx={{
             position: 'relative',
-            borderRadius: '50%',
+            borderRadius: '5%',
             overflow: 'hidden',
             '&:hover .MuiBox-root': { opacity: 1 },
             cursor: 'pointer'
           }}
         >
-          <Avatar alt="Avatar 1" src={avatar} sx={{ width: 124, height: 124, border: '1px dashed' }} />
+          <CardMedia component="img" sx={{ height: '100px', width: '100px' }} image={avatar} />
           <Box
             sx={{
               position: 'absolute',

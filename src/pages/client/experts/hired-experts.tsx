@@ -118,7 +118,7 @@ export const AccessibleTable = () => {
                   <TableRow key={row.expertName}>
                     <TableCell align="left">
                       <Stack direction={'row'}>
-                        <Avatar alt="avatar" src="" />
+                        <Avatar alt="avatar" src={row.avatar} />
                         <Link
                           to={'/client/hired-experts-personal'}
                           state={{ expertName: row.expertName, expertEmail: row.expertEmail }}
